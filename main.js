@@ -47,11 +47,11 @@ function init(ev) {
   // FIXME: notice above that getYous just returns a literal.
   // you should update the code below to instead call getOptions.
   // getOptions expects no arguments, and returns a promise that resolves to an array of strings.
-  const options = getYous()
-  updateRadio(options)
+  getOptions().then((result) => {
+    const options = result; updateRadio(options)
 
-  document.querySelectorAll("input[type='radio']").forEach((input) => {
-    input.addEventListener('change', changed);
+    document.querySelectorAll("input[type='radio']").forEach((input) => {
+      input.addEventListener('change', changed);})
   });
 }
 
@@ -62,9 +62,10 @@ function changed(ev) {
   // FIXME: notice above that getThemProblem just returns a literal.
   // you should update the code below to instead call getThemProblem.
   // getThemProblem expects a string parameter (the only valid strings are those returned by getOptions), and returns a promise that resolves to a string.
-  const they = getThey(you)
-  const output = document.getElementById('they')
-  output.textContent = they
+  getThemProblem(you).then((result) => {
+    const output = document.getElementById('they')
+    output.textContent = result
+  });
 }
 
 document.addEventListener("DOMContentLoaded", init);
